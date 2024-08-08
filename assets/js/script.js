@@ -7,6 +7,11 @@ const message = messages.querySelectorAll('.message');
 const messageSearch = document.querySelector('#message-search');
 
 const Bg = document.querySelector('.choose-color');
+const themeMenuItem = document.getElementById('theme');
+const themeLabel = themeMenuItem.querySelector('h3');
+const root = document.documentElement; // Reference to the root element for CSS variables
+
+let isDarkMode = false; // Flag to track theme mode
 
 // remove active class from all menu items
 const changeActiveItem = () => {
@@ -28,13 +33,11 @@ menuItems.forEach(item => {
     });
 })
 
-
-// ============================== MESSAGES ==============================
 // ============================== MESSAGES ==============================
 const searchMessage = () => {
     const val = messageSearch.value.toLowerCase();
     message.forEach(chat => {
-        let name = chat.querySelectorAll('h5').textContent.toLowerCase();
+        let name = chat.querySelector('h5').textContent.toLowerCase();
         if (name.indexOf(val) != -1) {
             chat.style.display = 'flex';
         } else {
@@ -64,12 +67,22 @@ const changeBG = () => {
     root.style.setProperty('--dark-color-lightness', darkColorLightness);
 }
 
-Bg.addEventListener('click', () => {
-    darkColorLightness = '95%';
-    whiteColorLightness = '10%';
-    lightColorLightness = '0%';
-
+// Toggle theme mode
+themeMenuItem.addEventListener('click', () => {
+    if (isDarkMode) {
+        // Set to Light Mode
+        darkColorLightness = '0%';
+        whiteColorLightness = '100%';
+        lightColorLightness = '95%';
+        themeLabel.textContent = 'Theme (Light)';
+    } else {
+        // Set to Dark Mode
+        darkColorLightness = '95%';
+        whiteColorLightness = '10%';
+        lightColorLightness = '0%';
+        themeLabel.textContent = 'Theme (Dark)';
+    }
 
     changeBG();
+    isDarkMode = !isDarkMode; // Toggle the flag
 });
-
