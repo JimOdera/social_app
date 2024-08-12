@@ -1,0 +1,171 @@
+body {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+img {
+    display: block;
+    width: 100%;
+    object-fit: cover;
+}
+
+h1 {
+    font-size: 2rem;
+    margin-bottom: 0.3rem;
+    color: var(--color-dark);
+}
+
+p {
+    font-size: 0.9rem;
+}
+
+a,
+a:active,
+a:visited {
+    color: var(--color-primary);
+    font-weight: 500;
+}
+
+.btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.7rem;
+}
+
+.btn img {
+    width: 1.2rem;
+}
+
+.btn.google:hover {
+    background: var(--color-black);
+    color: var(--color-light);
+    opacity: 1;
+}
+
+/* SIGN IN */
+.sign-in {
+    background: var(--color-white);
+    width: 60rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    border-radius: 1rem;
+    overflow: hidden;
+}
+
+.sign-in__details {
+    padding: 2rem 4rem;
+}
+
+.sign-in__form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 3rem;
+}
+
+.form__control {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+input:not([type=checkbox]) {
+    width: 100%;
+    border: 1px solid var(--color-light);
+    padding: 0.7rem;
+    border-radius: 0.5rem;
+}
+
+input::placeholder {
+    color: var(--color-gray);
+}
+
+label {
+    font-weight: 500;
+    color: var(--color-dark);
+}
+
+.sign-in__extras {
+    display: flex;
+    justify-content: space-between;
+}
+
+.sign-in__extras div {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.next__page {
+    margin-top: 1rem;
+    text-align: center;
+    display: block;
+}
+
+.sign-in__logo {
+    display: grid;
+    place-items: center;
+    background: url('/assets/image/bg_texture.png'), var(--color-primary);
+    height: 100%;
+}
+
+.sign-in__logo div {
+    width: 22rem;
+    aspect-ratio: 1/1;
+}
+
+button:last-child {
+    margin-top: -0.5rem;
+}
+
+
+/* ====================================== MEDIA QUERIES FOR SMALL TABLETS AND MOBILE PHONES ====================================== */
+/* ====================================== MEDIA QUERIES FOR SMALL TABLETS AND MOBILE PHONES ====================================== */
+@media screen and (max-width: 992px) {
+    body {
+        display: block;
+        background: var(--color-white);
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    .sign-in {
+        grid-template-columns: 1fr;
+        width: 100vw;
+        overflow: visible;
+    }
+
+    .sign-in__logo {
+        display: none;
+    }
+
+    .sign-in__details {
+        grid-row: 2/3;
+        padding: 2rem 1.5rem;
+    }
+
+    .sign-in__form {
+        margin-top: 1.5rem;
+        gap: 1rem;
+    }
+
+    .sign-in__extras {
+        flex-direction: column;
+        gap: 0.8rem;
+        margin-bottom: 1rem;
+    }
+
+    .sign-in__logo {
+        padding: 1.5rem 0;
+    }
+
+    .sign-in__logo div {
+        width: 12rem;
+    }
+}
