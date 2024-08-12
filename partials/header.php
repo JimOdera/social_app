@@ -8,6 +8,14 @@ if (session_status() === PHP_SESSION_NONE) {
 
 // Check if the user is logged in
 $isLoggedIn = isset($_SESSION['user_id']);
+
+// Set profile image path
+$profileImage = ROOT_URL . 'assets/image/default.png'; // Default profile image
+
+if ($isLoggedIn && !empty($_SESSION['profile_image'])) {
+    // If the user is logged in and has a profile image, use it
+    $profileImage = ROOT_URL . $_SESSION['profile_image'];
+}
 ?>
 
 <!DOCTYPE html>
@@ -35,15 +43,13 @@ $isLoggedIn = isset($_SESSION['user_id']);
             <div class="create">
                 <?php if ($isLoggedIn): ?>
                     <a href="<?= ROOT_URL ?>logout.php" class="btn btn-primary">Logout</a>
-                    <div class="profile-photo">
-                        <img src="<?= ROOT_URL . $_SESSION['profile_image'] ?>" alt="Profile Image">
-                    </div>
                 <?php else: ?>
                     <a href="<?= ROOT_URL ?>login.php" class="btn btn-primary">Login</a>
-                    <div class="profile-photo">
-                        <img src="<?= ROOT_URL ?>assets/images/default-profile.jpg" alt="Default Profile Image">
-                    </div>
                 <?php endif; ?>
+                
+                <div class="profile-photo">
+                    <img src="<?= $profileImage ?>" alt="Profile Image">
+                </div>
             </div>
         </div>
     </nav>
