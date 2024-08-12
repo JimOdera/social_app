@@ -14,7 +14,7 @@ $profileImage = ROOT_URL . 'assets/image/default.png'; // Default profile image
 
 if ($isLoggedIn && !empty($_SESSION['profile_image'])) {
     // If the user is logged in and has a profile image, use it
-    $profileImage = ROOT_URL . $_SESSION['profile_image'];
+    $profileImage = ROOT_URL . 'assets/uploads/' . $_SESSION['profile_image'];
 }
 ?>
 

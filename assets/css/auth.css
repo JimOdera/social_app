@@ -64,7 +64,7 @@ a:visited {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    margin-top: 3rem;
+    margin-top: 1.5rem;
 }
 
 .form__control {

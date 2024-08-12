@@ -24,6 +24,7 @@
             background-color: #f8d7da;
             color: #721c24;
             border: 1px solid #f5c6cb;
+            border-radius: 10px;
             padding: 10px;
             margin-bottom: 10px;
             display: none; /* Hidden by default */
