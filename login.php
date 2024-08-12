@@ -37,7 +37,7 @@
                     <p>Sign in with Google</p>
                 </button>
             </form>
-            <small class="next__page">Don't have an account? <a href="Register.html">Sign Up</a></small>
+            <small class="next__page">Don't have an account? <a href="<?= ROOT_URL ?>register.php">Sign Up</a></small>
         </article>
         <!-- <article class="sign-in__logo">
             <div>

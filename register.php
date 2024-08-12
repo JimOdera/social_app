@@ -52,7 +52,7 @@
                     <p>Sign up with Google</p>
                 </button>
             </form>
-            <small class="next__page">Already have an account? <a href="Register.html">Log In</a></small>
+            <small class="next__page">Already have an account? <a href="<?= ROOT_URL ?>login.php">Log In</a></small>
         </article>
         <!-- <article class="sign-in__logo">
             <div>
