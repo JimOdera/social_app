@@ -48,9 +48,9 @@ a:visited {
 /* SIGN IN */
 .sign-in {
     background: var(--color-white);
-    width: 60rem;
+    width: 50rem;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     align-items: center;
     border-radius: 1rem;
     overflow: hidden;
