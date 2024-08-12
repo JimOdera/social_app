@@ -18,7 +18,8 @@
         <article class="sign-in__details">
             <h1>Sign Up</h1>
             <p>Fill in the form below to create your account</p>
-            <form class="sign-in__form">
+            <form class="sign-in__form" action="register-logic.php" method="POST" enctype="multipart/form-data">
+                <!-- Form fields -->
                 <div class="form__control">
                     <label for="firstname">First Name</label>
                     <input type="text" name="firstname" id="firstname" placeholder="Enter your firstname">
@@ -41,8 +42,7 @@
                 </div>
                 <div class="form__control">
                     <label for="confirm_password">Confirm Password</label>
-                    <input type="confirm_password" name="confirm_password" id="confirm_password"
-                        placeholder="Confirm your password">
+                    <input type="password" name="confirm_password" id="confirm_password" placeholder="Confirm your password">
                 </div>
                 <!-- Image upload field -->
                 <div class="form__control">
