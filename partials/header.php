@@ -1,8 +1,14 @@
 <?php
-// Include database connection
+// Include database connection and start session
 require 'config/database.php';
-?>
 
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+// Check if the user is logged in
+$isLoggedIn = isset($_SESSION['user_id']);
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -27,10 +33,17 @@ require 'config/database.php';
                 <input type="search" placeholder="Search for creators, inspirations & projects">
             </div>
             <div class="create">
-                <a href="<?= ROOT_URL ?>login.php" class="btn btn-primary">Login</a>
-                <div class="profile-photo">
-                    <img src="<?= ROOT_URL ?>assets/images/profile-1.jpg" alt="">
-                </div>
+                <?php if ($isLoggedIn): ?>
+                    <a href="<?= ROOT_URL ?>logout.php" class="btn btn-primary">Logout</a>
+                    <div class="profile-photo">
+                        <img src="<?= ROOT_URL . $_SESSION['profile_image'] ?>" alt="Profile Image">
+                    </div>
+                <?php else: ?>
+                    <a href="<?= ROOT_URL ?>login.php" class="btn btn-primary">Login</a>
+                    <div class="profile-photo">
+                        <img src="<?= ROOT_URL ?>assets/images/default-profile.jpg" alt="Default Profile Image">
+                    </div>
+                <?php endif; ?>
             </div>
         </div>
     </nav>

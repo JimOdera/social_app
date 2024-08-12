@@ -33,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $_SESSION['profile_image'] = $user['profile_image'];
 
             // Redirect to a protected page
-            header('Location: '. ROOT_URL.'home.php');
+            header('Location: '. ROOT_URL.'index.php');
             exit();
         } else {
             $_SESSION['message'] = 'Invalid password. Please try again.';
