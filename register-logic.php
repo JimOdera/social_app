@@ -29,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Handle profile image upload
     $profile_image = null;
     if (isset($_FILES['profile_image']) && $_FILES['profile_image']['error'] === UPLOAD_ERR_OK) {
-        $img_dir = 'uploads/';
+        $img_dir = 'assets/uploads/'; // Updated path
         $img_file = $img_dir . basename($_FILES["profile_image"]["name"]);
         $imageFileType = strtolower(pathinfo($img_file, PATHINFO_EXTENSION));
         
