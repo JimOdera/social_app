@@ -38,6 +38,18 @@
     border: none;
 }
 
+body.dark-theme {
+    --dark-color-lightness: 95%;
+    --white-color-lightness: 10%;
+    --light-color-lightness: 0%;
+}
+
+body.light-theme {
+    --dark-color-lightness: 0%;
+    --white-color-lightness: 100%;
+    --light-color-lightness: 95%;
+}
+
 body {
     font-family: 'Poppins', sans-serif;
     color: var(--color-dark);
