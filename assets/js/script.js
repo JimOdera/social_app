@@ -7,11 +7,17 @@ const message = messages.querySelectorAll('.message');
 const messageSearch = document.querySelector('#message-search');
 
 const Bg = document.querySelector('.choose-color');
+// const themeMenuItem = document.getElementById('theme');
+// const themeLabel = themeMenuItem.querySelector('h3');
+// const root = document.documentElement; // Reference to the root element for CSS variables
+
+// let isDarkMode = false; // Flag to track theme mode
+
+const root = document.documentElement; // Reference to the root element for CSS variables
 const themeMenuItem = document.getElementById('theme');
 const themeLabel = themeMenuItem.querySelector('h3');
-const root = document.documentElement; // Reference to the root element for CSS variables
 
-let isDarkMode = false; // Flag to track theme mode
+let isDarkMode = root.getAttribute('data-theme') === 'dark'; // Check if the current theme is dark
 
 // remove active class from all menu items
 const changeActiveItem = () => {
@@ -67,22 +73,99 @@ const changeBG = () => {
     root.style.setProperty('--dark-color-lightness', darkColorLightness);
 }
 
-// Toggle theme mode
-themeMenuItem.addEventListener('click', () => {
-    if (isDarkMode) {
-        // Set to Light Mode
-        darkColorLightness = '0%';
-        whiteColorLightness = '100%';
-        lightColorLightness = '95%';
-        themeLabel.textContent = 'Theme (Light)';
-    } else {
-        // Set to Dark Mode
-        darkColorLightness = '95%';
-        whiteColorLightness = '10%';
-        lightColorLightness = '0%';
-        themeLabel.textContent = 'Theme (Dark)';
-    }
 
-    changeBG();
-    isDarkMode = !isDarkMode; // Toggle the flag
+
+// Function to apply the theme based on the isDarkMode flag
+const applyTheme = () => {
+    if (isDarkMode) {
+        root.style.setProperty('--dark-color-lightness', '95%');
+        root.style.setProperty('--white-color-lightness', '10%');
+        root.style.setProperty('--light-color-lightness', '0%');
+        themeLabel.textContent = 'Theme (Dark)';
+    } else {
+        root.style.setProperty('--dark-color-lightness', '0%');
+        root.style.setProperty('--white-color-lightness', '100%');
+        root.style.setProperty('--light-color-lightness', '95%');
+        themeLabel.textContent = 'Theme (Light)';
+    }
+};
+
+// Apply the theme on page load
+applyTheme();
+
+themeMenuItem.addEventListener('click', () => {
+    isDarkMode = !isDarkMode; // Toggle the theme flag
+    applyTheme();
+
+    // Send an AJAX request to save the theme preference to the database
+    fetch('save-theme.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ theme: isDarkMode ? 'dark' : 'light' }),
+    });
 });
+
+
+// // Toggle theme mode
+// themeMenuItem.addEventListener('click', () => {
+//     if (isDarkMode) {
+//         // Set to Light Mode
+//         darkColorLightness = '0%';
+//         whiteColorLightness = '100%';
+//         lightColorLightness = '95%';
+//         themeLabel.textContent = 'Theme (Light)';
+//     } else {
+//         // Set to Dark Mode
+//         darkColorLightness = '95%';
+//         whiteColorLightness = '10%';
+//         lightColorLightness = '0%';
+//         themeLabel.textContent = 'Theme (Dark)';
+//     }
+
+//     changeBG();
+//     isDarkMode = !isDarkMode; // Toggle the flag
+// });
+
+// Toggle theme mode
+// themeMenuItem.addEventListener('click', () => {
+//     if (isDarkMode) {
+//         // Set to Light Mode
+//         darkColorLightness = '0%';
+//         whiteColorLightness = '100%';
+//         lightColorLightness = '95%';
+//         themeLabel.textContent = 'Theme (Light)';
+//         saveThemePreference('light');
+//     } else {
+//         // Set to Dark Mode
+//         darkColorLightness = '95%';
+//         whiteColorLightness = '10%';
+//         lightColorLightness = '0%';
+//         themeLabel.textContent = 'Theme (Dark)';
+//         saveThemePreference('dark');
+//     }
+
+//     changeBG();
+//     isDarkMode = !isDarkMode; // Toggle the flag
+// });
+
+// function saveThemePreference(theme) {
+//     fetch('save_theme.php', {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/json'
+//         },
+//         body: JSON.stringify({ theme: theme })
+//     })
+//         .then(response => response.json())
+//         .then(data => {
+//             if (data.status === 'success') {
+//                 console.log('Theme saved successfully.');
+//             } else {
+//                 console.error('Error saving theme:', data.message);
+//             }
+//         })
+//         .catch(error => console.error('Error:', error));
+// }
+

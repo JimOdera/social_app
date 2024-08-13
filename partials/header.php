@@ -8,6 +8,20 @@ if (session_status() === PHP_SESSION_NONE) {
 
 // Check if the user is logged in
 $isLoggedIn = isset($_SESSION['user_id']);
+$themeMode = 'light'; // Default theme mode
+
+if ($isLoggedIn) {
+    $userId = $_SESSION['user_id'];
+
+    // Fetch the theme mode from the database
+    $query = "SELECT theme_mode FROM users WHERE id = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param('i', $userId);
+    $stmt->execute();
+    $stmt->bind_result($themeMode);
+    $stmt->fetch();
+    $stmt->close();
+}
 
 // Set profile image path
 $profileImage = ROOT_URL . 'assets/image/default.png'; // Default profile image
@@ -19,7 +33,9 @@ if ($isLoggedIn && !empty($_SESSION['profile_image'])) {
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="<?= htmlspecialchars($themeMode) ?>">
+
+<!-- <html lang="en"> -->
 
 <head>
     <meta charset="UTF-8">
