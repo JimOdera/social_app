@@ -63,9 +63,7 @@ if ($isLoggedIn && !empty($_SESSION['profile_image'])) {
     <?php endif; ?>
 </head>
 
-<!-- <body> -->
-<body class="<?= $themeMode === 'dark' ? 'dark-theme' : 'light-theme' ?>">
-
+<body>
 
     <!-- ========================================================================== -->
     <nav>
