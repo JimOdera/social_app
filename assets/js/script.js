@@ -13,6 +13,12 @@ const Bg = document.querySelector('.choose-color');
 
 // let isDarkMode = false; // Flag to track theme mode
 
+// const root = document.documentElement; // Reference to the root element for CSS variables
+// const themeMenuItem = document.getElementById('theme');
+// const themeLabel = themeMenuItem.querySelector('h3');
+
+// let isDarkMode = root.getAttribute('data-theme') === 'dark'; // Check if the current theme is dark
+
 const root = document.documentElement; // Reference to the root element for CSS variables
 const themeMenuItem = document.getElementById('theme');
 const themeLabel = themeMenuItem.querySelector('h3');
@@ -73,9 +79,6 @@ const changeBG = () => {
     root.style.setProperty('--dark-color-lightness', darkColorLightness);
 }
 
-
-
-// Function to apply the theme based on the isDarkMode flag
 const applyTheme = () => {
     if (isDarkMode) {
         root.style.setProperty('--dark-color-lightness', '95%');
@@ -98,14 +101,58 @@ themeMenuItem.addEventListener('click', () => {
     applyTheme();
 
     // Send an AJAX request to save the theme preference to the database
-    fetch('save-theme.php', {
+    fetch('save_theme.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({ theme: isDarkMode ? 'dark' : 'light' }),
-    });
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                console.log('Theme saved successfully.');
+            } else {
+                console.error('Error saving theme:', data.message);
+            }
+        })
+        .catch(error => console.error('Error:', error));
 });
+
+
+
+
+// // Function to apply the theme based on the isDarkMode flag
+// const applyTheme = () => {
+//     if (isDarkMode) {
+//         root.style.setProperty('--dark-color-lightness', '95%');
+//         root.style.setProperty('--white-color-lightness', '10%');
+//         root.style.setProperty('--light-color-lightness', '0%');
+//         themeLabel.textContent = 'Theme (Dark)';
+//     } else {
+//         root.style.setProperty('--dark-color-lightness', '0%');
+//         root.style.setProperty('--white-color-lightness', '100%');
+//         root.style.setProperty('--light-color-lightness', '95%');
+//         themeLabel.textContent = 'Theme (Light)';
+//     }
+// };
+
+// // Apply the theme on page load
+// applyTheme();
+
+// themeMenuItem.addEventListener('click', () => {
+//     isDarkMode = !isDarkMode; // Toggle the theme flag
+//     applyTheme();
+
+//     // Send an AJAX request to save the theme preference to the database
+//     fetch('save-theme.php', {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/json',
+//         },
+//         body: JSON.stringify({ theme: isDarkMode ? 'dark' : 'light' }),
+//     });
+// });
 
 
 // // Toggle theme mode
