@@ -44,6 +44,23 @@ if ($isLoggedIn && !empty($_SESSION['profile_image'])) {
     <link rel="stylesheet" href="<?= ROOT_URL ?>assets/css/style.css">
     <!-- ICONSCOUT CDN -->
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <?php if ($themeMode === 'dark'): ?>
+        <style>
+            :root {
+                --dark-color-lightness: 95%;
+                --white-color-lightness: 10%;
+                --light-color-lightness: 0%;
+            }
+        </style>
+    <?php else: ?>
+        <style>
+            :root {
+                --dark-color-lightness: 0%;
+                --white-color-lightness: 100%;
+                --light-color-lightness: 95%;
+            }
+        </style>
+    <?php endif; ?>
 </head>
 
 <body>
