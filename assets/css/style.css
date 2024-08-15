@@ -687,6 +687,8 @@ main .container .right {
     border-radius: 10px;
     margin: 1.5rem 1rem;
     cursor: pointer;
+    background-color: var(--color-light);
+    background-repeat: no-repeat;
 }
 
 .post-modal .image-upload span i {
