@@ -1,21 +1,43 @@
 <?php
+    require 'config/database.php';
     include 'partials/header.php';
+
+    // Check if the user is logged in
+    if ($isLoggedIn) {
+        $userId = $_SESSION['user_id'];
+
+        // Fetch user details from the database
+        $query = "SELECT firstname, lastname, username, profile_image FROM users WHERE id = ?";
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param('i', $userId);
+        $stmt->execute();
+        $stmt->bind_result($firstName, $lastName, $username, $profileImage);
+        $stmt->fetch();
+        $stmt->close();
+
+        // Set profile image path
+        $profileImagePath = !empty($profileImage) ? ROOT_URL . 'assets/uploads/' . $profileImage : ROOT_URL . 'assets/images/default-profile.jpg';
+    }
 ?>
 
     <!-- ========================================================================== -->
     <main>
         <div class="container">
             <div class="left">
+                <?php if ($isLoggedIn): ?>
                 <a href="" class="profile">
                     <div class="profile-photo">
-                        <img src="assets/images/profile-1.jpg" alt="">
+                        <img src="<?= htmlspecialchars($profileImagePath) ?>" alt="Profile Image">
+                        <?php if ($isLoggedIn): ?>
                         <div class="active"></div>
+                        <?php endif; ?>
                     </div>
                     <div class="handle">
-                        <h4>Iris West</h4>
-                        <p class="text-muted">@westallen</p>
+                        <h4><?= htmlspecialchars($firstName) . ' ' . htmlspecialchars($lastName) ?></h4>
+                        <p class="text-muted">@<?= htmlspecialchars($username) ?></p>
                     </div>
                 </a>
+                <?php endif; ?>
                 <!-- ========================================================================== -->
                 <div class="sidebar">
                     <a class="menu-item active">
@@ -584,6 +606,29 @@
             <!-- ========================================================================== -->
         </div>
     </main>
+
+
+    <!-- ================================================================================================= -->
+     <div class="post-modal">
+        <div class="card">
+            <h2>Create Post</h2>
+        </div>
+
+        <form action="" class="create-post">
+            <div class="profile-photo">
+                <img src="assets/images/profile-1.jpg" alt="">
+            </div>
+            <input type="text" placeholder="What's on your mind, Diana" id="create-post">
+        </form>
+
+        <div class="image-upload">
+            <span><i class="uil uil-image-upload"></i></span>
+        </div>
+
+        <!-- ============================================== -->
+        <label for="create-post" class="btn btn-primary">Create Post</label>
+     </div>
+    <!-- ================================================================================================= -->
 
     <script src="assets/js/script.js"></script>
 </body>
