@@ -216,3 +216,19 @@ themeMenuItem.addEventListener('click', () => {
 //         .catch(error => console.error('Error:', error));
 // }
 
+// Select the input field
+const createPostInput = document.querySelector('#create-post');
+
+// Select the modal
+const postModal = document.querySelector('.post-modal');
+
+// Function to open the modal
+const openModal = () => {
+    postModal.style.display = 'grid';
+};
+
+// Event listener to open the modal when the input field is clicked
+createPostInput.addEventListener('click', (event) => {
+    event.preventDefault(); // Prevent default action
+    openModal();
+});

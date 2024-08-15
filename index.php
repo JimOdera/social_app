@@ -161,7 +161,7 @@
                 </div>
 
                 <!-- ============================ -->
-                <form action="" class="create-post">
+                <form class="create-post">
                     <div class="profile-photo">
                         <img src="assets/images/profile-1.jpg" alt="">
                     </div>
