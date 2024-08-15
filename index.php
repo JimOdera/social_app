@@ -622,11 +622,9 @@
                     <input type="text" placeholder="What's on your mind, Diana" id="create-post">
                 </div>
 
-                <!-- <div class="image-upload">
-                    <span><i class="uil uil-image-upload"></i></span>
-                </div> -->
                 <div class="image-upload">
-                    <input type="file" id="file-input" style="display: none;">
+                    <input type="file" id="file-input" style="display: none;" accept="image/*">
+                    <div class="overlay"></div>
                     <span><i class="uil uil-image-upload"></i></span>
                 </div>
 
@@ -649,9 +647,13 @@
             if (file) {
                 const reader = new FileReader();
                 reader.onload = function(e) {
-                    document.querySelector('.image-upload').style.backgroundImage = `url('${e.target.result}')`;
-                    document.querySelector('.image-upload').style.backgroundSize = 'cover';
-                    document.querySelector('.image-upload').style.backgroundPosition = 'center';
+                    const imageUploadDiv = document.querySelector('.image-upload');
+                    imageUploadDiv.style.backgroundImage = `url('${e.target.result}')`;
+                    imageUploadDiv.style.backgroundSize = 'cover';
+                    imageUploadDiv.style.backgroundPosition = 'center';
+                    
+                    // Show the overlay
+                    document.querySelector('.overlay').classList.add('show');
                 };
                 reader.readAsDataURL(file);
             }
