@@ -700,9 +700,12 @@ main .container .right {
     cursor: pointer;
     background-color: var(--color-light);
     background-repeat: no-repeat;
+    background-size: cover;
+    /* Ensure the image covers the entire div */
+    background-position: center;
+    /* Center the image */
     position: relative;
     overflow: hidden;
-    /* Ensures overlay stays within bounds */
 }
 
 .post-modal .image-upload .overlay {
@@ -717,6 +720,8 @@ main .container .right {
     /* Start hidden */
     transition: opacity 0.3s ease;
     /* Smooth transition when shown */
+    z-index: 1;
+    /* Ensures overlay is above background image but below the icon */
 }
 
 .post-modal .image-upload img-preview {
@@ -729,11 +734,16 @@ main .container .right {
     /* Show overlay when an image is selected */
 }
 
+.post-modal .image-upload span {
+    position: relative;
+    z-index: 2;
+    /* Keeps the icon above the overlay */
+}
+
 .post-modal .image-upload span i {
     font-size: 3.5rem;
     color: var(--color-primary);
     cursor: pointer;
-    /* margin: 0 1rem; */
 }
 
 /* ====================================== MEDIA QUERIES FOR SMALL TABLETS AND MOBILE PHONES ====================================== */
