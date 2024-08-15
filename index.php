@@ -612,21 +612,21 @@
      <div class="post-modal">
         <div class="card">
             <h2>Create Post</h2>
-        </div>
 
-        <form action="" class="create-post">
-            <div class="profile-photo">
-                <img src="assets/images/profile-1.jpg" alt="">
+            <form action="" class="create-post">
+                <div class="profile-photo">
+                    <img src="assets/images/profile-1.jpg" alt="">
+                </div>
+                <input type="text" placeholder="What's on your mind, Diana" id="create-post">
+            </form>
+
+            <div class="image-upload">
+                <span><i class="uil uil-image-upload"></i></span>
             </div>
-            <input type="text" placeholder="What's on your mind, Diana" id="create-post">
-        </form>
 
-        <div class="image-upload">
-            <span><i class="uil uil-image-upload"></i></span>
+            <!-- ============================================== -->
+            <label for="create-post" class="btn btn-primary">Create Post</label>
         </div>
-
-        <!-- ============================================== -->
-        <label for="create-post" class="btn btn-primary">Create Post</label>
      </div>
     <!-- ================================================================================================= -->
 
