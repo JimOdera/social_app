@@ -614,24 +614,49 @@
         <div class="card">
             <h2>Create Post</h2>
 
-            <form action="" class="create-post">
-                <div class="profile-photo">
-                    <img src="assets/images/profile-1.jpg" alt="">
+            <form action="create_post.php" method="POST" enctype="multipart/form-data">
+                <div action="" class="create-post">
+                    <div class="profile-photo">
+                        <img src="assets/images/profile-1.jpg" alt="">
+                    </div>
+                    <input type="text" placeholder="What's on your mind, Diana" id="create-post">
                 </div>
-                <input type="text" placeholder="What's on your mind, Diana" id="create-post">
+
+                <!-- <div class="image-upload">
+                    <span><i class="uil uil-image-upload"></i></span>
+                </div> -->
+                <div class="image-upload">
+                    <input type="file" id="file-input" style="display: none;">
+                    <span><i class="uil uil-image-upload"></i></span>
+                </div>
+
+                <!-- ============================================== -->
+                <button type="submit" class="btn btn-primary">Create Post</button>
             </form>
-
-            <div class="image-upload">
-                <span><i class="uil uil-image-upload"></i></span>
-            </div>
-
-            <!-- ============================================== -->
-            <label for="create-post" class="btn btn-primary">Create Post</label>
         </div>
      </div>
     <!-- ================================================================================================= -->
 
     <script src="assets/js/script.js"></script>
+
+    <script>
+        document.querySelector('.image-upload').addEventListener('click', function() {
+            document.getElementById('file-input').click();
+        });
+
+        document.getElementById('file-input').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.querySelector('.image-upload').style.backgroundImage = `url('${e.target.result}')`;
+                    document.querySelector('.image-upload').style.backgroundSize = 'cover';
+                    document.querySelector('.image-upload').style.backgroundPosition = 'center';
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
 </body>
 
 </html>
