@@ -680,6 +680,17 @@ main .container .right {
     margin-right: 1rem;
 }
 
+/* .post-modal .image-upload {
+    width: 100%;
+    border: 1px solid var(--color-light);
+    padding: 5rem;
+    border-radius: 10px;
+    margin: 1.5rem 1rem;
+    cursor: pointer;
+    background-color: var(--color-light);
+    background-repeat: no-repeat;
+} */
+
 .post-modal .image-upload {
     width: 100%;
     border: 1px solid var(--color-light);
@@ -689,6 +700,33 @@ main .container .right {
     cursor: pointer;
     background-color: var(--color-light);
     background-repeat: no-repeat;
+    position: relative;
+    overflow: hidden;
+    /* Ensures overlay stays within bounds */
+}
+
+.post-modal .image-upload .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    /* Black overlay with 60% opacity */
+    opacity: 0;
+    /* Start hidden */
+    transition: opacity 0.3s ease;
+    /* Smooth transition when shown */
+}
+
+.post-modal .image-upload img-preview {
+    width: 100%;
+    height: 100%;
+}
+
+.post-modal .image-upload .overlay.show {
+    opacity: 1;
+    /* Show overlay when an image is selected */
 }
 
 .post-modal .image-upload span i {
