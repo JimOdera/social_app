@@ -232,3 +232,15 @@ createPostInput.addEventListener('click', (event) => {
     event.preventDefault(); // Prevent default action
     openModal();
 });
+
+// Function to close the modal
+const closeModal = () => {
+    postModal.style.display = 'none';
+};
+
+// Add a close event to the modal background
+postModal.addEventListener('click', (event) => {
+    if (event.target === postModal) {
+        closeModal();
+    }
+});

@@ -161,13 +161,13 @@
                 </div>
 
                 <!-- ============================ -->
-                <form action="" class="create-post">
+                <form action="" class="create-post"  id="create-post">
                     <div class="profile-photo">
                         <img src="assets/images/profile-1.jpg" alt="">
                     </div>
-                    <input type="text" placeholder="What's on your mind, Diana" id="create-post">
+                    <input type="text" placeholder="What's on your mind, Diana">
                     <span><i class="uil uil-image-upload"></i></span>
-                    <input type="submit" value="Post" class="btn btn-primary" disabled>
+                    <input type="submit" value="Post" class="btn btn-primary">
                 </form>
 
 
