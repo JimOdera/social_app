@@ -619,17 +619,17 @@
                     <div class="profile-photo">
                         <img src="assets/images/profile-1.jpg" alt="">
                     </div>
-                    <input type="text" placeholder="What's on your mind, Diana" id="create-post">
+                    <input type="text" name="post_text" placeholder="What's on your mind, Diana" id="create-post">
                 </div>
 
                 <div class="image-upload">
-                    <input type="file" id="file-input" style="display: none;" accept="image/*">
+                    <input type="file" name="post_image" id="file-input" style="display: none;" accept="image/*">
                     <div class="overlay"></div>
                     <span><i class="uil uil-image-upload"></i></span>
                 </div>
 
                 <!-- ============================================== -->
-                <button type="submit" class="btn btn-primary">Create Post</button>
+                <button type="submit" name="submit" class="btn btn-primary">Create Post</button>
             </form>
         </div>
      </div>
@@ -659,6 +659,80 @@
             }
         });
     </script>
+
+    <script>
+        document.querySelector('.create-post form').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent default form submission
+
+    const formData = new FormData(this);
+
+    // Perform AJAX request
+    fetch('create_post.php', {
+        method: 'POST',
+        body: formData,
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Append the new post to the feeds
+            const newPost = `
+                <div class="post">
+                    <div class="post-text">${formData.get('post_text')}</div>
+                    ${formData.get('post_image') ? `<img src="assets/uploads/posts/${data.postImage}" alt="Post Image">` : ''}
+                </div>`;
+            document.querySelector('.feeds').insertAdjacentHTML('afterbegin', newPost);
+
+            // Close the modal
+            document.querySelector('.post-modal').style.display = 'none';
+
+            // Clear the form
+            this.reset();
+            document.querySelector('.image-upload').style.backgroundImage = '';
+            document.querySelector('.overlay').classList.remove('show');
+
+            // Scroll to the top of the page to see the new post
+            window.scrollTo(0, 0);
+        } else {
+            alert('Failed to create post: ' + data.error);
+        }
+    })
+    .catch(error => console.error('Error:', error));
+});
+
+    </script>
+
+    <!-- <script>
+        document.querySelector('.create-post form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            const formData = new FormData(this);
+
+            // Perform AJAX request
+            fetch('create_post.php', {
+                method: 'POST',
+                body: formData,
+            })
+            .then(response => response.text())
+            .then(data => {
+                if (data) {
+                    // Append the new post to the feeds
+                    document.querySelector('.feeds').insertAdjacentHTML('afterbegin', data);
+
+                    // Close the modal
+                    document.querySelector('.post-modal').style.display = 'none';
+
+                    // Clear the form
+                    this.reset();
+                    document.querySelector('.image-upload').style.backgroundImage = '';
+                    document.querySelector('.overlay').classList.remove('show');
+                } else {
+                    alert('Failed to create post.');
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        });
+
+    </script> -->
 </body>
 
 </html>
